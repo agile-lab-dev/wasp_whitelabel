@@ -1,0 +1,8 @@
+# SBT
+target/
+
+# IntelliJ IDEA
+.idea/
+
+# spark-lib
+spark-lib/managed/
