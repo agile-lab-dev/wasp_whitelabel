@@ -8,6 +8,8 @@ scalaVersion := "2.10.6"
 
 // add WASP repository
 resolvers += Resolver.bintrayRepo("agile-lab-dev", "WASP")
+resolvers += Resolver.bintrayRepo("agile-lab-dev", "Spark-Solr")
+resolvers += "Restlet Repository" at "http://maven.restlet.org"
 
 // WASP dependencies
 val waspVersion = "1.0.6"
