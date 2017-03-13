@@ -6,16 +6,25 @@ version := "1.0"
 
 scalaVersion := "2.10.6"
 
-// add WASP repository
+// add resolvers
 resolvers += Resolver.bintrayRepo("agile-lab-dev", "WASP")
 resolvers += Resolver.bintrayRepo("agile-lab-dev", "Spark-Solr")
 resolvers += "Restlet Repository" at "http://maven.restlet.org"
+resolvers += "Hadoop Releases" at "https://repository.cloudera.com/artifactory/cloudera-repos/"
 
-// WASP dependencies
-val waspVersion = "1.0.6"
+/* WASP */
+val waspVersion = "1.1.m10"
 val waspDependencies = Seq(
-	"it.agilelab.bigdata.wasp" %% "wasp" % waspVersion,
-	"it.agilelab.bigdata.wasp" %% "core" % waspVersion,
+	"it.agilelab.bigdata.wasp" %% "wasp" % waspVersion excludeAll(
+		ExclusionRule(organization = "org.eclipse.jetty"),
+		ExclusionRule(organization = "javax.servlet"),
+		ExclusionRule(organization = "org.eclipse.jetty.orbit")
+		),
+	"it.agilelab.bigdata.wasp" %% "core" % waspVersion excludeAll(
+		ExclusionRule(organization = "org.eclipse.jetty"),
+		ExclusionRule(organization = "javax.servlet"),
+		ExclusionRule(organization = "org.eclipse.jetty.orbit")
+		),
 	"it.agilelab.bigdata.wasp" %% "consumers" % waspVersion,
 	"it.agilelab.bigdata.wasp" %% "producers" % waspVersion,
 	"it.agilelab.bigdata.wasp" %% "launcher" % waspVersion,
@@ -31,6 +40,9 @@ dependencyOverrides ++= Set(
 
 // set main class to the launcher implementation
 mainClass in Compile := Some("it.agilelab.bigdata.wasp.pipegraph.metro.launchers.MetroLauncher")
+
+// export jars instead of a bunch of classes
+exportJars := true
 
 /* Add any dependencies needed by the Spark executors at runtime here; their jars will be automagically added to the
  * spark-lib folder and will be available to them without further intervention.

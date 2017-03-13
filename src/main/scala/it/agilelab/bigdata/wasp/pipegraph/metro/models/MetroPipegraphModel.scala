@@ -35,7 +35,8 @@ object MetroPipegraphModel {
                        WriterModel.IndexWriter(MetroIndexModel.metroIndex._id.get,
                                                MetroIndexModel.metroIndex.name, defaultDataStoreIndexed),
                        List(),
-                       Some(StrategyModel("it.agilelab.bigdata.wasp.pipegraph.metro.strategies.MetroStrategy", None))
+                       Some(StrategyModel("it.agilelab.bigdata.wasp.pipegraph.metro.strategies.MetroStrategy", None)),
+                       ETLModel.KAFKA_ACCESS_TYPE_RECEIVED_BASED
               )
           ),
           rt = Nil,
